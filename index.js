@@ -4,14 +4,13 @@ const cryptoJSON = require('crypto-json')
 
 const ENCRYPTED_MEMBERS = require('./members.json')
 
-const MEMBERS =
-  (CONFIG.CRYPTO_JSON_MEMBER_ENCRYPT_KEY != undefined
-    ? cryptoJSON.decrypt(ENCRYPTED_MEMBERS, CONFIG.CRYPTO_JSON_MEMBER_ENCRYPT_KEY, {
-      encoding: CONFIG.CRYPTO_JSON_ENCODING,
-      keys: ['members'],
-      algorithm: CONFIG.CRYPTO_JSON_ALGORITHM
-    }).members
-    : ENCRYPTED_MEMBERS.members).map(email => email.toLowerCase())
+const MEMBERS = ENCRYPTED_MEMBERS.members.map(email => email.toLowerCase())
+// (CONFIG.CRYPTO_JSON_MEMBER_ENCRYPT_KEY != undefined
+//   ? cryptoJSON.decrypt(ENCRYPTED_MEMBERS, CONFIG.CRYPTO_JSON_MEMBER_ENCRYPT_KEY, {
+//     encoding: CONFIG.CRYPTO_JSON_ENCODING,
+//     keys: ['members'],
+//     algorithm: CONFIG.CRYPTO_JSON_ALGORITHM
+//   }).members : ENCRYPTED_MEMBERS.members)
 
 const { Email } = require('./smtp.js')
 
@@ -42,12 +41,12 @@ client.on('message', message => {
       message.author
         .createDM()
         .then(dmchannel =>
-          dmchannel.send('Reply with your email for verification').catch(reason => console.log(reason))
+          dmchannel.send('To gain access to the MIT Math Majors discord, please enter your full MIT email address.').catch(reason => console.log(reason))
         )
         .catch(reason => console.log(reason))
     } else if (message.type === 'GUILD_MEMBER_JOIN') {
       message.channel
-        .send(MESSAGE_PREFIX + "Send '!verify' to access other channels")
+        .send("<@" + message.author.id + ">, welcome to the MIT Math Majors discord! Please type '!verify' to verify your email.")
         .catch(reason => console.log(reason))
     }
   } else if (message.channel.guild == null) {
@@ -60,12 +59,12 @@ client.on('message', message => {
         sendEmail(email_address, code)
           .then(
             message.channel
-              .send(MESSAGE_PREFIX + 'Check your email now! Reply with the code we sent you')
+              .send("Check your email now! Reply with the code we sent you ^^")
               .catch(reason => console.log(reason))
           )
           .catch(reason => console.log(reason))
       } else {
-        message.channel.send(MESSAGE_PREFIX + CONFIG.MEMBER_JOIN_MESSAGE).catch(reason => console.log(reason))
+        message.channel.send("Unfortunately, we don't seem to recognize that email :( Please try again.").catch(reason => console.log(reason))
       }
     } else if (text.match(/^[a-zA-Z0-9]{6}$/)) {
       Promise.all([code_email_temp.get(text), code_discord_temp.get(text)])
@@ -79,11 +78,11 @@ client.on('message', message => {
               .then(member =>
                 member
                   .addRole(role)
-                  .then(message.channel.send('You are now verified!').catch(reason => console.log(reason)))
+                  .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
               )
               .catch(reason => console.log(reason))
           } else {
-            message.channel.send(MESSAGE_PREFIX + "That code isn't right")
+            message.channel.send("Unfortunately, that code doesn't seem to be correct. Please try again.")
           }
         })
         .catch(reason => console.log(reason))
