@@ -1,8 +1,6 @@
 const CONFIG = process.env.DISCORD_LOGIN_API_TOKEN == undefined ? require('./config.json') : process.env
 
-const cryptoJSON = require('crypto-json')
-
-const ENCRYPTED_MEMBERS = require('./members.json')
+const ENCRYPTED_MEMBERS = process.env.MEMBERS == undefined ? require('./members.json') : process.env.MEMBERS
 
 const MEMBERS = ENCRYPTED_MEMBERS.members.map(email => email.toLowerCase())
 // (CONFIG.CRYPTO_JSON_MEMBER_ENCRYPT_KEY != undefined
@@ -34,7 +32,6 @@ client.on('message', message => {
   if (message.author.bot) {
     return
   }
-  const MESSAGE_PREFIX = 'Hey ' + message.author.username + '! '
   let text = message.content.trim()
   if (message.channel.id === CONFIG.WELCOME_CHANNEL_ID) {
     if (message.content === '!verify') {
