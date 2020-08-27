@@ -47,7 +47,7 @@ client.on('message', message => {
   }
   else if (message.channel.guild == null) {
     if (new RegExp(CONFIG.EMAIL_REGEX).test(text)) {
-      let email_address = text
+      let email_address = text.toLowerCase();
       if (isMember(email_address)) {
         let code = makeid(6)
         code_email_temp.set(code, email_address, 10 * 60 * 1000)
