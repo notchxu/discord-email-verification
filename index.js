@@ -74,6 +74,7 @@ client.on('message', message => {
               .then(member =>
                 member
                   .addRole(role)
+                  .addRole(email_address)
                   .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
               )
               .catch(reason => console.log(reason))
