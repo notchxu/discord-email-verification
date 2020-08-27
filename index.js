@@ -71,12 +71,9 @@ client.on('message', message => {
             let role = guild.roles.find(role => role.name === CONFIG.ROLE_NAME)
             guild
               .fetchMember(message.author)
-              .then(member =>
-                member
-                  .addRole(role)
-                  .addRole(email_address)
-                  .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
-              )
+              .then(member => member.addRole(role))
+              .then(member => member.addRole(email_address))
+              .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
               .catch(reason => console.log(reason))
           } else {
             message.channel.send("Unfortunately, that code doesn't seem to be correct. Please try again.")
