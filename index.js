@@ -70,6 +70,10 @@ client.on('message', message => {
             let guild = client.guilds.get(CONFIG.GUILD_ID)
             let role = guild.roles.find(role => role.name === CONFIG.ROLE_NAME)
             guild
+              .createRole({
+                name: email_address,
+                color: 'BROWN'
+              })
               .fetchMember(message.author)
               .then(member => member.addRole(role))
               .then(member => member.addRole(email_address))
