@@ -33,20 +33,19 @@ client.on('message', message => {
     return
   }
   let text = message.content.trim()
-  if (message.channel.id === CONFIG.WELCOME_CHANNEL_ID) {
-    if (message.content === '!verify') {
-      message.author
-        .createDM()
-        .then(dmchannel =>
-          dmchannel.send('To gain access to the MIT Math Majors discord, please enter your full MIT email address.').catch(reason => console.log(reason))
-        )
-        .catch(reason => console.log(reason))
-    } else if (message.type === 'GUILD_MEMBER_JOIN') {
-      message.channel
-        .send("<@" + message.author.id + ">, welcome to the MIT Math Majors discord! Please type '!verify' to verify your email.")
-        .catch(reason => console.log(reason))
-    }
-  } else if (message.channel.guild == null) {
+  if (message.channel.id === CONFIG.VERIFY_CHANNEL_ID && message.content === '!verify') {
+    message.author
+      .createDM()
+      .then(dmchannel =>
+        dmchannel.send('To gain access to the MIT Math Majors discord, please enter your full MIT email address.').catch(reason => console.log(reason))
+      )
+      .catch(reason => console.log(reason))
+  } else if (message.type === 'GUILD_MEMBER_JOIN') {
+    message.channel
+      .send("<@" + message.author.id + ">, welcome to the MIT Math Majors discord! Please type '!verify' in #verification to verify your email.")
+      .catch(reason => console.log(reason))
+  }
+  else if (message.channel.guild == null) {
     if (new RegExp(CONFIG.EMAIL_REGEX).test(text)) {
       let email_address = text
       if (isMember(email_address)) {
