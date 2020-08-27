@@ -88,7 +88,7 @@ client.on('message', message => {
 })
 
 // isMember = email_address => MEMBERS.indexOf(email_address.toLowerCase()) > -1
-isMember = email_address => true
+isMember = email_address => email_address.endsWith("@mit.edu") || email_address.endsWith("@math.mit.edu")
 
 // https://www.smtpjs.com/
 sendEmail = (email_address, code) =>
