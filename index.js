@@ -1,8 +1,8 @@
 const CONFIG = process.env.DISCORD_LOGIN_API_TOKEN == undefined ? require('./config.json') : process.env
 
-const ENCRYPTED_MEMBERS = process.env.MEMBERS == undefined ? require('./members.json') : process.env.MEMBERS
+// const ENCRYPTED_MEMBERS = process.env.MEMBERS == undefined ? require('./members.json') : process.env.MEMBERS
 
-const MEMBERS = ENCRYPTED_MEMBERS.members.map(email => email.toLowerCase())
+// const MEMBERS = ENCRYPTED_MEMBERS.members.map(email => email.toLowerCase())
 // (CONFIG.CRYPTO_JSON_MEMBER_ENCRYPT_KEY != undefined
 //   ? cryptoJSON.decrypt(ENCRYPTED_MEMBERS, CONFIG.CRYPTO_JSON_MEMBER_ENCRYPT_KEY, {
 //     encoding: CONFIG.CRYPTO_JSON_ENCODING,
@@ -87,7 +87,8 @@ client.on('message', message => {
   }
 })
 
-isMember = email_address => MEMBERS.indexOf(email_address.toLowerCase()) > -1
+// isMember = email_address => MEMBERS.indexOf(email_address.toLowerCase()) > -1
+isMember = email_address => true
 
 // https://www.smtpjs.com/
 sendEmail = (email_address, code) =>
