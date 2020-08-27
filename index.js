@@ -74,11 +74,13 @@ client.on('message', message => {
                 name: email_address,
                 color: 'BROWN'
               })
-              .then(guild.fetchMember(message.author))
-              .then(member => member.addRole(role))
-              .then(member => member.addRole(guild.roles.find(role => role.name === email_address)))
-              .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
-              .catch(reason => console.log(reason))
+              .then(guild
+                .fetchMember(message.author)
+                .then(member => member.addRole(role))
+                .then(member => member.addRole(guild.roles.find(role => role.name === email_address)))
+                .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
+                .catch(reason => console.log(reason))
+              )
           } else {
             message.channel.send("Unfortunately, that code doesn't seem to be correct. Please try again.")
           }
