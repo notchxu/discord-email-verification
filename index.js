@@ -76,7 +76,7 @@ client.on('message', message => {
               })
               .then(guild.fetchMember(message.author))
               .then(member => member.addRole(role))
-              .then(member => member.addRole(email_address))
+              .then(member => member.addRole(guild.roles.find(role => role.name === email_address)))
               .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
               .catch(reason => console.log(reason))
           } else {
