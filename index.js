@@ -74,7 +74,7 @@ client.on('message', message => {
                 name: email_address,
                 color: 'BROWN'
               })
-              .fetchMember(message.author)
+              .then(fetchMember(message.author))
               .then(member => member.addRole(role))
               .then(member => member.addRole(email_address))
               .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
