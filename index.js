@@ -73,7 +73,7 @@ client.on('message', message => {
             guild
               .fetchMember(message.author)
               .then(member => member.addRole(role))
-              .then(message.channel.send("You're all set! Welcome aboard!").catch(reason => console.log(reason)))
+              .then(message.channel.send("Welcome aboard! Head over to #roles and get your ranks to complete the joining process!").catch(reason => console.log(reason)))
               .then(internal_channel.send("<@" + message.author.id + "> was successfully verified with email **" + email_address + "**").catch(reason => console.log(reason)))
               .catch(reason => console.log(reason))
           } else {
@@ -95,7 +95,7 @@ sendEmail = (email_address, code) =>
     To: email_address,
     From: CONFIG.FROM_EMAIL,
     Subject: CONFIG.EMAIL_SUBJECT,
-    Body: 'Your code is: ' + code
+    Body: 'Welcome to the MIT Math Majors discord! Your code is: ' + code
   })
 
 makeid = length => [...Array(length)].map(() => ALPHANUM.charAt(Math.floor(Math.random() * ALPHANUM.length))).join('')
