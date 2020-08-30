@@ -55,7 +55,7 @@ client.on('message', message => {
         sendEmail(email_address, code)
           .then(
             message.channel
-              .send("Check your email now! Reply with the code we sent you (NOTE: may take a few moments to send / may appear in spam)")
+              .send("Check your email now! Reply with the code we sent you (NOTE: may take a few moments to send / may appear in spam. If you don't see your email there, please message one of us mods instead.)")
               .catch(reason => console.log(reason))
           )
           .catch(reason => console.log(reason))
