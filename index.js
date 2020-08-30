@@ -37,12 +37,12 @@ client.on('message', message => {
     message.author
       .createDM()
       .then(dmchannel =>
-        dmchannel.send('To gain access to the MIT Math Majors discord, please enter your full MIT email address.').catch(reason => console.log(reason))
+        dmchannel.send('To gain access to the Course 18 Discord, please enter your full MIT email address.').catch(reason => console.log(reason))
       )
       .catch(reason => console.log(reason))
   } else if (message.type === 'GUILD_MEMBER_JOIN') {
     message.channel
-      .send("<@" + message.author.id + ">, welcome to the MIT Math Majors discord! Please type '!verify' in #verification to verify your email.")
+      .send("<@" + message.author.id + ">, welcome to the Course 18 discord! Please type '!verify' in the #verification channel to verify your email.")
       .catch(reason => console.log(reason))
   }
   else if (message.channel.guild == null) {
@@ -95,7 +95,7 @@ sendEmail = (email_address, code) =>
     To: email_address,
     From: CONFIG.FROM_EMAIL,
     Subject: CONFIG.EMAIL_SUBJECT,
-    Body: 'Welcome to the MIT Math Majors discord! Your code is: ' + code
+    Body: 'Welcome to the Course 18 Discord! Your code is: ' + code
   })
 
 makeid = length => [...Array(length)].map(() => ALPHANUM.charAt(Math.floor(Math.random() * ALPHANUM.length))).join('')
