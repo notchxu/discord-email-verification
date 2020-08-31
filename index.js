@@ -42,8 +42,9 @@ client.on('message', message => {
       .catch(reason => console.log(reason))
   } else if (message.type === 'GUILD_MEMBER_JOIN') {
     message.channel
-      .send("<@" + message.author.id + ">, welcome to the Course 18 discord! Please type '!verify' in the #verification channel to verify your email.")
+      .send("<@" + message.author.id + ">, welcome to the Course 18 discord! Please DM one of the mods to verify your email.")
       .catch(reason => console.log(reason))
+    //.send("<@" + message.author.id + ">, welcome to the Course 18 discord! Please type '!verify' in the #verification channel to verify your email.")
   }
   else if (message.channel.guild == null) {
     if (new RegExp(CONFIG.EMAIL_REGEX).test(text)) {
