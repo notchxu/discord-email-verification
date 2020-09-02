@@ -77,7 +77,7 @@ client.on('message', message => {
               .then(internal_channel.send("<@" + message.author.id + "> was successfully verified with email **" + email_address + "**").catch(reason => console.log(reason)))
               .catch(reason => console.log(reason))
           } else {
-            message.channel.send("Unfortunately, that code doesn't seem to be correct. Please try again.")
+            message.channel.send("Unfortunately, that code doesn't seem to be correct. Please try again. (NOTE: if your code really /was/ correct, try !verify in #verification again and ask for another verification email.)")
           }
         })
         .catch(reason => console.log(reason))
